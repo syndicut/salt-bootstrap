@@ -27,14 +27,7 @@ Bootstrap
 ---------
 
 If you're looking for the *one-liner* to install salt, please scroll to the bottom and use the
-instructions for *Installing via an Insecure One-Liner*.
-
-.. Attention:: The following examples are provided as an helpful and short way to install Salt.  
-The URL used is just an HTTP redirect and as such it **will**, most likely, make either ``curl`` or 
-``wget`` or ``fetch`` (in FreeBSD >= 10), to complain about certificate issues. If this worries 
-you, you **should not** use this URL. Use instead::
-
-  https://github.com/saltstack/salt-bootstrap/raw/stable/bootstrap-salt.sh
+instructions for `Installing via an Insecure One-Liner`_
 
 
 Examples
@@ -49,62 +42,31 @@ Using ``curl`` to install latest git:
 
 .. code:: console
 
-  curl -L http://bootstrap.saltstack.org -o install_salt.sh
+  curl -L https://bootstrap.saltstack.com -o install_salt.sh
   sudo sh install_salt.sh git develop
-
-
-If you have certificate issues using ``curl``, try the following:
-
-.. code:: console 
-
-  curl --insecure -L http://bootstrap.saltstack.org -o install_salt.sh
-  sudo sh install_salt.sh git develop
-
-.. Note::
-    The above method redirects to the raw file on Github and thus bypasses certificate checks.
-    If you wish not to bypass certificate identification, you may use the following
-    to download the installation script with curl:
-
-.. code:: console
-
-    curl -L https://raw.github.com/saltstack/salt-bootstrap/stable/bootstrap-salt.sh -o install_salt.sh
 
 
 Using ``wget`` to install your distribution's stable packages:
 
 .. code:: console
 
-  wget -O install_salt.sh http://bootstrap.saltstack.org
+  wget -O install_salt.sh https://bootstrap.saltstack.com
   sudo sh install_salt.sh
 
-
-If you have certificate issues using ``wget`` try the following:
-
-.. code:: console
-
-  wget --no-check-certificate -O install_salt.sh http://bootstrap.saltstack.org
-  sudo sh install_salt.sh
-
-Alternatively, if you wish not to bypass the certification verification step
-you may download the script without a redirect:
-
-.. code:: console
-
-  wget -O install_salt.sh https://raw.github.com/saltstack/salt-bootstrap/stable/bootstrap-salt.sh
-  sudo sh install_salt.sh
 
 Install a specific version from git using ``wget``:
 
 .. code:: console
 
-  wget -O install_salt.sh http://bootstrap.saltstack.org
+  wget -O install_salt.sh https://bootstrap.saltstack.com
   sudo sh install_salt.sh -P git v0.16.4
+
 
 If you already have python installed, ``python 2.6``, then it's as easy as:
 
 .. code:: console
 
-  python -m urllib "http://bootstrap.saltstack.org" > install_salt.sh
+  python -m urllib "https://bootstrap.saltstack.com" > install_salt.sh
   sudo sh install_salt.sh git develop
 
 
@@ -112,7 +74,7 @@ All python versions should support the following one liner:
 
 .. code:: console
 
-  python -c 'import urllib; print urllib.urlopen("http://bootstrap.saltstack.org").read()' > install_salt.sh
+  python -c 'import urllib; print urllib.urlopen("https://bootstrap.saltstack.com").read()' > install_salt.sh
   sudo sh install_salt.sh git develop
 
 
@@ -121,25 +83,7 @@ have ``fetch`` available though:
 
 .. code:: console
 
-  fetch -o install_salt.sh http://bootstrap.saltstack.org
-  sudo sh install_salt.sh
-
-
-For FreeBSD >= 10 you might need to make fetch ignore the certificate issue:
-
-.. code:: console
-
-  fetch --no-verify-peer -o install_salt.sh http://bootstrap.saltstack.org
-  sudo sh install_salt.sh
-
-.. Note::
-    The above method redirects to the raw file on Github and thus bypasses certificate checks.
-    If you wish not to bypass certificate identification, you may use the following
-    to download the installation script with curl:
-
-.. code:: console
-
-  fetch -o install_salt.sh install_salt.sh https://raw.github.com/saltstack/salt-bootstrap/stable/bootstrap-salt.sh
+  fetch -o install_salt.sh https://bootstrap.saltstack.com
   sudo sh install_salt.sh
 
 
@@ -147,22 +91,24 @@ If all you want is to install a ``salt-master`` using latest git:
 
 .. code:: console
 
-  curl -o salt_install.sh -L http://bootstrap.saltstack.org
-  sudo sh salt_install.sh -M -N git develop
+  curl -o install_salt.sh -L https://bootstrap.saltstack.com
+  sudo sh install_salt.sh -M -N git develop
+
 
 If you want to install a specific release version (based on the git tags):
 
 .. code:: console
 
-  curl -o salt_install.sh -L http://bootstrap.saltstack.org
-  sudo sh salt_install.sh git v0.16.4
+  curl -o install_salt.sh -L https://bootstrap.saltstack.com
+  sudo sh install_salt.sh git v0.16.4
+
 
 To install a specific branch from a git fork:
 
 .. code:: console
 
-  curl -o salt_install.sh -L http://bootstrap.saltstack.org
-  sudo sh salt_install.sh -g https://github.com/myuser/salt.git git mybranch
+  curl -o install_salt.sh -L https://bootstrap.saltstack.com
+  sudo sh install_salt.sh -g https://github.com/myuser/salt.git git mybranch
 
 
 Installing via an Insecure One-Liner
@@ -174,6 +120,7 @@ The following examples illustrate how to install Salt via a one-liner.
     Warning! These methods do not involve a verification step and assume that the delivered file
     is trustworthy.
 
+
 Examples
 ~~~~~~~~
 
@@ -181,7 +128,7 @@ Installing the latest develop branch of Salt:
 
 .. code:: console
 
-  curl -L http://bootstrap.saltstack.org | sudo sh -s -- git develop
+  curl -L https://bootstrap.saltstack.com | sudo sh -s -- git develop
 
 Any of the example above which use two-lines can be made to run in a single-line
 configuration with minor modifications.
@@ -369,7 +316,7 @@ Supported Operating Systems
 - SmartOS
 - SuSE 11 SP1/11 SP2
 - Ubuntu 10.x/11.x/12.x/13.04/13.10
-
+- Elementary OS 0.2
 
 
 
@@ -382,8 +329,15 @@ version.
 
 .. code:: console
 
-  curl -L https://raw.github.com/saltstack/salt-bootstrap/develop/bootstrap-salt.sh | \
-      sudo sh -s -- git develop
+  curl -o install_salt.sh -L https://bootstrap.saltstack.com/develop
+  sudo sh install_salt.sh git develop
+
+
+Or the insecure one liner:
+
+.. code:: console
+
+  curl -L https://bootstrap.saltstack.com/develop | sudo sh -s -- git develop
 
 
 If after trying this, you still see the same problems, then, please `file an issue`_.
@@ -416,5 +370,7 @@ Ubuntu box. First, install Vagrant, then::
     <vm> $ cd /salt_bootstrap
     <vm> $ sudo sh salt-bootstrap.sh
 
+
 .. _Vagrant: http://www.vagrantup.com
+.. _Installing via an Insecure One-Liner: #installing-via-an-insecure-one-liner
 .. vim: fenc=utf-8 spell spl=en cc=100 tw=99 fo=want sts=2 sw=2 et

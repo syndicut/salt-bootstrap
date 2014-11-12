@@ -52,6 +52,11 @@ class BootstrapSuiteParser(SaltTestingParser):
             action='store_true',
             help='Run Installation tests'
         )
+        self.test_selection_group.add_option(
+            '--stable-salt-version',
+            default='v2014.1.10',
+            help='Specify the current stable release of salt'
+        )
 
     def run_integration_suite(self, display_name, suffix='[!_]*.py'):
         '''
@@ -68,7 +73,8 @@ def main():
     parser = BootstrapSuiteParser(
         TEST_DIR,
         xml_output_dir=XML_OUTPUT_DIR,
-        html_output_dir=HTML_OUTPUT_DIR
+        html_output_dir=HTML_OUTPUT_DIR,
+        tests_logfile=os.path.join(tempfile.gettempdir(), 'bootstrap-runtests.log')
     )
 
     options, _ = parser.parse_args()
@@ -80,6 +86,9 @@ def main():
 
     print 'Detected system grains:'
     pprint.pprint(GRAINS)
+
+    # Set the current stable version of salt
+    os.environ['CURRENT_SALT_STABLE_VERSION'] = options.stable_salt_version
 
     overall_status = []
 
